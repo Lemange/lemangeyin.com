@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #FFA011;
+  background: #fff;
+  font-size: 10px;
+  line-height: 2;
+  font-family: "Lucida Grande", sans-serif;
+  text-align: center;
+}
+
+::selection {
+  color: #fff;
+  background: #FFA011;
+}
+
+.title,
+.contact {
+  margin: 100px 50px;
+  color: #FFA011;
+  transition: color .5s ease;
+}
+
+.title:hover,
+.contact:hover {
+  color: #FEE101;
+  cursor: crosshair;
+}
+
+.title {
+  font-size: 3.6em;
+  font-weight: bold;
+}
+
+.logo {
+  margin: 0 auto;
+  height: 244px;
+  width: 244px;
+  background: url("lemange.jpg") center / 244px no-repeat;
+}
+
+.contact {
+  font-size: 1.2em;
+}
