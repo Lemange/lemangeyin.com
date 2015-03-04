@@ -1,44 +1,85 @@
 body {
   margin: 0;
   padding: 0;
-  color: #FFA011;
+  color: #333;
   background: #fff;
   font-size: 10px;
   line-height: 2;
-  font-family: "Lucida Grande", sans-serif;
+  font-family: "Lucida Grande", 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: center;
 }
 
-::selection {
-  color: #fff;
-  background: #FFA011;
-}
-
-.title,
-.contact {
-  margin: 100px 50px;
-  color: #FFA011;
-  transition: color .5s ease;
-}
-
-.title:hover,
-.contact:hover {
-  color: #FEE101;
-  cursor: crosshair;
-}
-
 .title {
+  margin: 100px 50px 80px;
+}
+
+.title-lg {
   font-size: 3.6em;
-  font-weight: bold;
+}
+
+.title-sm {
+  font-size: 2.6em;
 }
 
 .logo {
+  display: block;
   margin: 0 auto;
-  height: 244px;
-  width: 244px;
-  background: url("lemange.jpg") center / 244px no-repeat;
+  background: url("lemange.png") center / 100% no-repeat;
 }
 
-.contact {
-  font-size: 1.2em;
+.logo-lg {
+  height: 284px;
+  width: 284px;
+}
+
+.logo-sm {
+  height: 96px;
+  width: 96px;
+}
+
+.definition {
+  margin: 80px 50px 100px;
+  font-size: 2em;
+}
+
+.definition em {
+  margin: 0 .5em;
+  color: #888;
+}
+
+.lemon {
+  color: #fee101;
+}
+
+.orange {
+  color: #ffa012;
+}
+
+.intro {
+  color: #ffa012;
+  background: #fffce9;
+}
+
+.intro .title {
+  margin-bottom: 20px;
+}
+
+.intro .logo {
+  margin-bottom: 55px;
+}
+
+.intro p {
+  margin: 1em auto;
+  width: 415px;
+  font-size: 1.8em;
+  text-align: left;
+}
+
+a {
+  color: #ffa012;
+  transition: color .5s ease;
+}
+
+a:hover {
+  color: #fee101;
 }
