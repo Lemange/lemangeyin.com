@@ -3,14 +3,14 @@ body {
   padding: 0;
   color: #333;
   background: #fff;
-  font-size: 10px;
+  font-size: 0.625rem;
   line-height: 2;
   font-family: "Lucida Grande", 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: center;
 }
 
 .title {
-  margin: 100px 50px 80px;
+  margin: 6.25rem 3.125rem 5rem;
 }
 
 .title-lg {
@@ -28,17 +28,17 @@ body {
 }
 
 .logo-lg {
-  height: 284px;
-  width: 284px;
+  height: 17.75rem;
+  width: 17.75rem;
 }
 
 .logo-sm {
-  height: 96px;
-  width: 96px;
+  height: 6rem;
+  width: 6rem;
 }
 
 .definition {
-  margin: 80px 50px 100px;
+  margin: 5rem 3.125rem 6.25rem;
   font-size: 2em;
 }
 
@@ -61,16 +61,16 @@ body {
 }
 
 .intro .title {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .intro .logo {
-  margin-bottom: 55px;
+  margin-bottom: 3.4375rem;
 }
 
 .intro p {
   margin: 1em auto;
-  width: 415px;
+  width: 25.9375rem;
   font-size: 1.8em;
   text-align: left;
 }
