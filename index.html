@@ -15,7 +15,7 @@
 
     :root {
       --bg: #fffce9;
-      --text: #ffa012;
+      --text: #d87900;
       --muted: #888;
       --accent: #fee101;
       --border: #ffa012;
@@ -44,19 +44,16 @@
     }
 
     .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      object-fit: cover;
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      display: block;
       flex-shrink: 0;
     }
 
     .avatar-fallback {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
+      width: 68px;
+      height: 68px;
       background: linear-gradient(135deg, var(--accent), var(--text));
       display: none;
       align-items: center;
@@ -79,7 +76,7 @@
     }
 
     .bio {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.9;
       margin-bottom: 2rem;
     }
@@ -120,8 +117,7 @@
       text-transform: uppercase;
       letter-spacing: 0.09em;
       color: var(--muted);
-      margin-bottom: 0.9rem;
-      margin-left: 0.25rem;
+      margin: 0 0 0.9rem 0.25rem;
     }
 
     .channel-list {
@@ -136,16 +132,19 @@
       align-items: center;
       gap: 0.65rem;
       padding: 0.7rem 0.85rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 160, 18, 0.22);
       border-radius: var(--radius);
       background: var(--surface);
       text-decoration: none;
       color: inherit;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: background 0.15s, border-color 0.15s;
     }
 
-    .channel-item:hover { background: var(--bg); }
+    .channel-item:hover {
+      background: var(--bg);
+      border-color: rgba(255, 160, 18, 0.45);
+    }
 
     .channel-icon {
       width: 34px;
@@ -163,7 +162,7 @@
     .channel-meta { flex: 1; min-width: 0; }
 
     .channel-name {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
       white-space: nowrap;
       overflow: hidden;
@@ -171,7 +170,7 @@
     }
 
     .channel-handle {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
       margin-top: 1px;
     }
@@ -181,6 +180,11 @@
       color: var(--muted);
       flex-shrink: 0;
       margin-left: auto;
+      transition: transform 0.15s;
+    }
+
+    .channel-item:hover .channel-arrow {
+      transform: translateX(2px);
     }
 
     .inline-links {
@@ -194,7 +198,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text);
       text-decoration: none;
       border: 1px solid var(--border);
@@ -230,7 +234,7 @@
 <body>
   <main class="page">
     <header class="header">
-      <img class="avatar" id="avatar-img" src="https://lemangeyin.com/lemange.png" alt="Lemange" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <img class="avatar" id="avatar-img" src="lemange.png" alt="Lemange" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
       <div class="avatar-fallback" id="avatar-fallback">🍊</div>
       <div class="header-text">
         <h1>Hi, I'm Lemange.</h1>
@@ -245,10 +249,10 @@
     </p>
 
     <section class="card" aria-label="Broadcasting">
-      <div class="card-title">Broadcasting</div>
+      <h2 class="card-title">Broadcasting</h2>
       <div class="channel-list">
         <a class="channel-item" href="https://t.me/LemangePlay" target="_blank" rel="noopener">
-          <div class="channel-icon">🎮</div>
+          <div class="channel-icon" aria-hidden="true">🎮</div>
           <div class="channel-meta">
             <div class="channel-name">🍋🍊今天玩了什么</div>
             <div class="channel-handle">@LemangePlay</div>
@@ -256,7 +260,7 @@
           <span class="channel-arrow">→</span>
         </a>
         <a class="channel-item" href="https://t.me/lemangebar" target="_blank" rel="noopener">
-          <div class="channel-icon">🍻</div>
+          <div class="channel-icon" aria-hidden="true">🍻</div>
           <div class="channel-meta">
             <div class="channel-name">维基百酒</div>
             <div class="channel-handle">@lemangebar</div>
@@ -264,7 +268,7 @@
           <span class="channel-arrow">→</span>
         </a>
         <a class="channel-item" href="https://t.me/passcodes" target="_blank" rel="noopener">
-          <div class="channel-icon">💛</div>
+          <div class="channel-icon" aria-hidden="true">💛</div>
           <div class="channel-meta">
             <div class="channel-name">Passcodes</div>
             <div class="channel-handle">@passcodes</div>
@@ -272,7 +276,7 @@
           <span class="channel-arrow">→</span>
         </a>
         <a class="channel-item" href="https://t.me/+E9ZrrwKzc5Y2ZDVl" target="_blank" rel="noopener">
-          <img class="channel-icon" src="https://lemangeyin.com/avatar.jpg" alt="">
+          <img class="channel-icon" src="avatar.jpg" alt="">
           <div class="channel-meta">
             <div class="channel-name">🍋🍊 今天吃了什么</div>
           </div>
@@ -282,7 +286,7 @@
     </section>
 
     <section class="card" aria-label="Find me on">
-      <div class="card-title">Find me on</div>
+      <h2 class="card-title">Find me on</h2>
       <div class="inline-links">
         <a class="social-link" href="https://t.me/lemange" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
@@ -312,7 +316,7 @@
     </section>
 
     <section class="card" aria-label="Friends">
-      <div class="card-title">Friends</div>
+      <h2 class="card-title">Friends</h2>
       <div class="inline-links">
         <a class="social-link" href="https://www.neoatlantis.org" target="_blank" rel="noopener">😶 NeoAtlantis</a>
         <a class="social-link" href="https://ddddxxx.github.io" target="_blank" rel="noopener">👦🏻 ddddxxx</a>
