@@ -1,28 +1,337 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lemange's personal website" />
+  <meta property="og:title" content="Lemange" />
+  <meta property="og:description" content="A Chinese from Wuhan, Master's Degree in France, Ingress Enlightened player" />
+  <meta property="og:image" content="https://lemangeyin.com/lemange.png" />
+  <meta property="og:url" content="https://lemangeyin.com" />
+  <meta name="theme-color" content="#fffce9" />
   <title>Lemange</title>
-  <meta charset="utf-8">
-  <meta name="description" content="Lemange’s personal website">
-  <link href="style.css" rel="stylesheet" media="screen">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fffce9;
+      --text: #ffa012;
+      --muted: #888;
+      --accent: #fee101;
+      --border: #ffa012;
+      --surface: #fffde0;
+      --radius: 8px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .avatar-fallback {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--accent), var(--text));
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 0.2rem;
+    }
+
+    .header-text .sub {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .bio {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .bio a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--border);
+      transition: text-decoration-color 0.15s;
+    }
+
+    .bio a:hover { text-decoration-color: var(--accent); }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--text));
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+      margin-left: 0.25rem;
+    }
+
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-left: 0.25rem;
+    }
+
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .channel-item:hover { background: var(--bg); }
+
+    .channel-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .channel-meta { flex: 1; min-width: 0; }
+
+    .channel-name {
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .channel-handle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .channel-arrow {
+      font-size: 14px;
+      color: var(--muted);
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.45rem;
+      margin-left: 0.25rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 4px 10px;
+      background: var(--surface);
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .social-link:hover {
+      background: var(--bg);
+      border-color: var(--text);
+    }
+
+    .social-link svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .footer {
+      margin-top: 2.5rem;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 2.5rem 1.25rem 4rem; }
+      .header-text h1 { font-size: 20px; }
+    }
+  </style>
 </head>
 <body>
-  <h1 class="title title-lg">
-    Hi, I’m Lemange.
-  </h1>
-  <a class="logo logo-lg" href="about.html"></a>
-  <p class="definition">
-    Lemange <em>n.</em> a mixture of <span class="lemon">lemon</span> and <span class="orange">orange</span>.
-  </p>
+  <main class="page">
+    <header class="header">
+      <img class="avatar" id="avatar-img" src="https://lemangeyin.com/lemange.png" alt="Lemange" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="avatar-fallback" id="avatar-fallback">🍊</div>
+      <div class="header-text">
+        <h1>Hi, I'm Lemange.</h1>
+        <p class="sub">Lemange <em>n.</em> a mixture of lemon and orange.</p>
+      </div>
+    </header>
+
+    <p class="bio">
+      A Chinese from <a href="https://wikipedia.org/wiki/Wuhan">Wuhan</a> 🇨🇳<br>
+      Got my <a href="https://web.archive.org/web/20230524061456/https://psm-montbeliard.fr/">Master's Degree</a> in France 🇫🇷<br>
+      Playing <a href="https://www.ingress.com">Ingress</a> as a level-14 Enlightened 💚
+    </p>
+
+    <section class="card" aria-label="Broadcasting">
+      <div class="card-title">Broadcasting</div>
+      <div class="channel-list">
+        <a class="channel-item" href="https://t.me/LemangePlay" target="_blank" rel="noopener">
+          <div class="channel-icon">🎮</div>
+          <div class="channel-meta">
+            <div class="channel-name">🍋🍊今天玩了什么</div>
+            <div class="channel-handle">@LemangePlay</div>
+          </div>
+          <span class="channel-arrow">→</span>
+        </a>
+        <a class="channel-item" href="https://t.me/lemangebar" target="_blank" rel="noopener">
+          <div class="channel-icon">🍻</div>
+          <div class="channel-meta">
+            <div class="channel-name">维基百酒</div>
+            <div class="channel-handle">@lemangebar</div>
+          </div>
+          <span class="channel-arrow">→</span>
+        </a>
+        <a class="channel-item" href="https://t.me/passcodes" target="_blank" rel="noopener">
+          <div class="channel-icon">💛</div>
+          <div class="channel-meta">
+            <div class="channel-name">Passcodes</div>
+            <div class="channel-handle">@passcodes</div>
+          </div>
+          <span class="channel-arrow">→</span>
+        </a>
+        <a class="channel-item" href="https://t.me/+E9ZrrwKzc5Y2ZDVl" target="_blank" rel="noopener">
+          <img class="channel-icon" src="https://lemangeyin.com/avatar.jpg" alt="">
+          <div class="channel-meta">
+            <div class="channel-name">🍋🍊 今天吃了什么</div>
+          </div>
+          <span class="channel-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Find me on">
+      <div class="card-title">Find me on</div>
+      <div class="inline-links">
+        <a class="social-link" href="https://t.me/lemange" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+          Telegram
+        </a>
+        <a class="social-link" href="mailto:lemangeyin@gmail.com">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          Gmail
+        </a>
+        <a class="social-link" href="https://github.com/Lemange" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+        <a class="social-link" href="https://steamcommunity.com/profiles/76561198356567968" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.455 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
+          Steam
+        </a>
+        <a class="social-link" href="https://twitter.com/Lemange" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Twitter / X
+        </a>
+        <a class="social-link" href="https://instagram.com/lemangeyin/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Friends">
+      <div class="card-title">Friends</div>
+      <div class="inline-links">
+        <a class="social-link" href="https://www.neoatlantis.org" target="_blank" rel="noopener">😶 NeoAtlantis</a>
+        <a class="social-link" href="https://ddddxxx.github.io" target="_blank" rel="noopener">👦🏻 ddddxxx</a>
+        <a class="social-link" href="https://foggyice.github.io" target="_blank" rel="noopener">👦🏻 FoggyIce</a>
+        <a class="social-link" href="http://robin-metzinger.fr" target="_blank" rel="noopener">👦🏼 Robin</a>
+        <a class="social-link" href="https://blog.dwx.io/" target="_blank" rel="noopener">🐱 Tom Cat</a>
+      </div>
+    </section>
+
+    <footer class="footer" id="footer"></footer>
+  </main>
+
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-63708612-1', 'auto');
-    ga('send', 'pageview');
+    (function () {
+      var start = 2015;
+      var now = new Date().getFullYear();
+      document.getElementById('footer').textContent =
+        '\u00A9 ' + start + '\u2013' + now + ' Lemange';
+    })();
   </script>
 </body>
 </html>
-
-<!-- Powered by GitHub Pages -->
